@@ -1,0 +1,35 @@
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./src:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "8088:80"
+    depends_on:
+      - app
+    container_name: project_nginx
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./src:/var/www/
+    depends_on:
+      - db
+    container_name: project_app
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: lardocker # вот это нужно будет поставить внутри src так же в DB_Host
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8101:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: project_db
+
+#Что бы подключиться к бд в dbever или другой программы указывать (нужно дописать)
