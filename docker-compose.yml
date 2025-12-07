@@ -25,7 +25,7 @@ services:
     volumes:
       - ./tmp/db:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: lardocker # вот это нужно будет поставить внутри src так же в DB_Host
+      MYSQL_DATABASE: lara # вот это нужно будет поставить внутри src так же в DB_Host
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "8101:3306"

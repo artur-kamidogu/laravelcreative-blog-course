@@ -1,3 +1,5 @@
+//TODO Переделать 
+
 Docker для Laravel приложения простого уровня
 
 ## 📁 Структура проекта
@@ -130,7 +132,7 @@ server {
 
 ### 1. Установка Laravel в контейнере app
 ```bash
-docker exec -it project_app composer create-project laravel/laravel .
+`docker exec -it project_app composer create-project laravel/laravel .`
 ```
 **Что делает:**
 - Устанавливает фреймворк Laravel в папку `/var/www/` контейнера
