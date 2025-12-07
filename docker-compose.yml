@@ -16,20 +16,20 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./src:/var/www/
-    depends_on:
-      - db
+#    depends_on:
+#      - db
     container_name: project_app
-  db:
-    image: mysql:8.0
-    restart: always
-    volumes:
-      - ./tmp/db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: lara # вот это нужно будет поставить внутри src так же в DB_Host
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "8101:3306"
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    container_name: project_db
+#  db: # не работает, лень разбираться подлючил sqlite !
+#    image: mysql:8.0
+#    restart: always
+#    volumes:
+#      - ./tmp/db:/var/lib/mysql
+#    environment:
+#      MYSQL_DATABASE: laravel # вот это нужно будет поставить внутри src так же в DB_Host
+#      MYSQL_ROOT_PASSWORD: root
+#    ports:
+#      - "8101:3306"
+#    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+#    container_name: project_db
 
 #Что бы подключиться к бд в dbever или другой программы указывать (нужно дописать)
