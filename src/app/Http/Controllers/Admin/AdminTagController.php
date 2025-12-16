@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Category\StoreRequest;
-use App\Http\Requests\Admin\Category\UpdateRequest;
-use App\Models\Category;
+use App\Http\Requests\Admin\Tag\StoreRequest;
+use App\Http\Requests\Admin\Tag\UpdateRequest;
+use App\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -14,42 +14,42 @@ class AdminTagController extends Controller
 {
     public function index(): View
     {
-        $categories = Category::all();
-        return view('admin.category.index',compact('categories'));
+        $tags = Tag::all();
+        return view('admin.tag.index',compact('tags'));
     }
-    public function show(Category $category): View
+    public function show(Tag $tag): View
     {
-        return view('admin.category.show',compact('category'));
+        return view('admin.tag.show',compact('tag'));
     }
     public function create(): View
     {
-        return view('admin.category.create');
+        return view('admin.tag.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        Category::firstOrCreate(['title'=>$data['title']]); // проверка по ключу и значению
-        return redirect()->route('admin.category.index');
+        Tag::firstOrCreate(['title'=>$data['title']]); // проверка по ключу и значению
+        return redirect()->route('admin.tag.index');
     }
 
-    public function edit(Category $category): View
+    public function edit(Tag $tag): View
     {
-        return view('admin.category.edit',compact('category'));
+        return view('admin.tag.edit',compact('tag'));
     }
 
-    public function update(Category $category,UpdateRequest $request): RedirectResponse
+    public function update(Tag $tag, UpdateRequest $request): RedirectResponse
     {
 
         $data = $request->validated();
-        $category->update($data);
-        return redirect()->route('admin.category.show', compact('category'));
+        $tag->update($data);
+        return redirect()->route('admin.tag.show', compact('tag'));
     }
 
-    public function delete(Category $category): RedirectResponse
+    public function delete(Tag $tag): RedirectResponse
     {
-        $category->delete();
-        return redirect()->route('admin.category.index');
+        $tag->delete();
+        return redirect()->route('admin.tag.index');
     }
 
 }

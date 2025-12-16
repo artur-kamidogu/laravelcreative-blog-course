@@ -36,7 +36,7 @@ Route::group([ 'prefix' => 'admin'], function (){
             Route::get('/blog', 'show');
     });
 
-    Route::group([ 'prefix' => 'category'], function (){
+    Route::group([ 'prefix' => 'categories'], function (){
         Route::controller(\App\Http\Controllers\Admin\AdminCategoryController::class)->group(function () {
             Route::get('', 'index') ->name('admin.category.index');
             Route::get('/create', 'create') ->name('admin.category.create');
@@ -48,7 +48,7 @@ Route::group([ 'prefix' => 'admin'], function (){
         });
     });
 
-    Route::group([ 'prefix' => 'tag'], function (){
+    Route::group([ 'prefix' => 'tags'], function (){
         Route::controller(\App\Http\Controllers\Admin\AdminTagController::class)->group(function () {
             Route::get('', 'index') ->name('admin.tag.index');
             Route::get('/create', 'create') ->name('admin.tag.create');

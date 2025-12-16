@@ -10,8 +10,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="navbar-toggler-icon fas fa-th-list"></i>
+            <a href="{{route('admin.tag.index')}}" class="nav-link">
+                <i class="navbar-toggler-icon fas fa-tags"></i>
                 <p>Tags</p>
             </a>
         </li>
