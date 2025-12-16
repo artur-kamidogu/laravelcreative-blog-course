@@ -31,8 +31,33 @@ Route::controller(BlogController::class)->group(function () {
 
 //
 Route::group([ 'prefix' => 'admin'], function (){
+
     Route::controller(AdminBlogController::class)->group(function () {
-        Route::get('/blog', 'show');
+            Route::get('/blog', 'show');
+    });
+
+    Route::group([ 'prefix' => 'category'], function (){
+        Route::controller(\App\Http\Controllers\Admin\AdminCategoryController::class)->group(function () {
+            Route::get('', 'index') ->name('admin.category.index');
+            Route::get('/create', 'create') ->name('admin.category.create');
+            Route::post('', 'store') ->name('admin.category.store');
+            Route::get('/{category}', 'show') ->name('admin.category.show');
+            Route::get('/{category}/edit', 'edit') ->name('admin.category.edit');
+            Route::patch('/{category}', 'update') ->name('admin.category.update');
+            Route::delete('/{category}', 'delete') ->name('admin.category.delete');
+        });
+    });
+
+    Route::group([ 'prefix' => 'tag'], function (){
+        Route::controller(\App\Http\Controllers\Admin\AdminTagController::class)->group(function () {
+            Route::get('', 'index') ->name('admin.tag.index');
+            Route::get('/create', 'create') ->name('admin.tag.create');
+            Route::post('', 'store') ->name('admin.tag.store');
+            Route::get('/{tag}', 'show') ->name('admin.tag.show');
+            Route::get('/{tag}/edit', 'edit') ->name('admin.tag.edit');
+            Route::patch('/{tag}', 'update') ->name('admin.tag.update');
+            Route::delete('/{tag}', 'delete') ->name('admin.tag.delete');
+        });
     });
 });
 

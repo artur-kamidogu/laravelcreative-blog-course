@@ -1,5 +1,6 @@
 @extends('admin.layouts.admin-lte')
 
 @section('content')
-    fggfhgfhgfhghgs
+    @include('admin.includes.tmp-cards')
+
 @endsection
