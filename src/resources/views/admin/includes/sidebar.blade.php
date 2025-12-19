@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('admin.post.index')}}" class="nav-link">
                 <i class="navbar-toggler-icon fas fa-th-list"></i>
                 <p>Posts</p>
             </a>
