@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" name="title" placeholder="Post title"
                            value="{{$post->title}}">
                     @error('title')
-                    <div class="text-danger">Field this ${{$message}}</div>
+                    <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
 
@@ -28,7 +28,7 @@
                         {{$post->content}}
                     </textarea>
                     @error('content')
-                    <div class="text-danger">Field this ${{$message}}</div>
+                    <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
 
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     @error('preview_image')
-                    <div class="text-danger">Field this ${{$message}}</div>
+                    <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
 
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     @error('main_image')
-                    <div class="text-danger">Field this ${{$message}}</div>
+                    <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
 
@@ -81,7 +81,8 @@
                         @endforeach
                     </select>
                     @error('category_id')
-                    <div class="text-danger">Field this ${{$message}}</div>
+{{--                    TODO понять почему не отображается это говно и в тегах тоже посмотреть--}}
+                    <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
 
@@ -96,6 +97,11 @@
                                     value="{{$tag->id}}">{{$tag->title}}</option>
                         @endforeach
                     </select>
+
+                    @error('tag_ids')
+                    {{--                    TODO понять почему не отображается это говно и в тегах тоже посмотреть--}}
+                    <div class="text-danger">${{$message}}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">

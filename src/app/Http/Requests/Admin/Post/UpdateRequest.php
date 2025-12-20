@@ -31,4 +31,28 @@ class UpdateRequest extends FormRequest
             'tag_ids.*' => 'nullable|exists:tags,id',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Дружочек пирожочек ты забыл заполнить поле',
+            'title.string' => 'Атата это должна быть строка',
+
+            'content.required' => 'Дружочек пирожочек ты забыл заполнить поле',
+            'content.string' => 'Атата это должна быть строка',
+
+            'preview_image.required' => 'Дружочек пирожочек ты забыл добавить картинку',
+            'preview_image.file' => 'Атата это должен быть файл',
+
+            'main_image.required' => 'Дружочек пирожочек ты забыл добавить картинку',
+            'main_image.file' => 'Атата это должен быть файл',
+
+            'category_id.required' => 'Ты забыл про категорию',
+            'category_id.integer' => 'Если ты это видишь это жестко, как ты передал не число ?',
+            'category_id.exist' =>'Как ты блять из списка выбрал то что не входит в этот список?',
+
+            'tags_ids.array' => 'ну тут должен быть массив',
+            'tags_ids.exist' => 'ну ты и мамкин хацкер',
+        ];
+    }
 }
