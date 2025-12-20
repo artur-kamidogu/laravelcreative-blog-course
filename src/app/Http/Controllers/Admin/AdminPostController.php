@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Post\UpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Service\PostService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminPostController extends Controller
 {
+    public $service;
+
+    public function __construct(PostService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index(): View
     {
         $posts = Post::all();
@@ -33,19 +41,8 @@ class AdminPostController extends Controller
 
     public function store(StoreRequest $request)
     {
-        try {
-            $data = $request->validated();
-            $tagIds = $data['tag_ids'];
-            unset($data['tag_ids']);
-
-            $data['preview_image'] = Storage::disk('public')->put('/images',$data['preview_image']);
-            $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image'] );
-
-            $post = Post::firstOrCreate($data);
-            $post->tags()->attach($tagIds);
-        } catch (\Exception $exception) {
-            abort(404);
-        }
+        $data = $request->validated();
+        $this->service->store($data);
         return redirect()->route('admin.post.index');
     }
 
@@ -60,19 +57,8 @@ class AdminPostController extends Controller
     {
 
         $data = $request->validated();
-        $tagIds = $data['tag_ids'];
-        unset($data['tag_ids']);
+        $post = $this->service->update($data, $post);
 
-        if (isset($data['preview_image'])) {
-            $data['preview_image'] = Storage::disk('public')->put('/images',$data['preview_image']);
-        }
-
-        if (isset($data['main_image'])) {
-            $data['main_image'] = Storage::disk('public')->put('/images',$data['main_image']);
-        }
-
-        $post->update($data);
-        $post->tags()->sync($tagIds);
         return view('admin.post.show', compact('post'));
     }
 

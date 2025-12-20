@@ -10,7 +10,6 @@
                 <div class="col-12">
                     Post page
                     <div class="card">
-
                         <div class="post-images mb-4 w-25">
                             <div class="row">
                                 <!-- Главное изображение -->

@@ -85,6 +85,9 @@
                                     value="{{$tag->id}}">{{$tag->title}}</option>
                         @endforeach
                     </select>
+                    @error('tag_ids[]')
+                    <div class="text-danger">Field this ${{$message}}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
