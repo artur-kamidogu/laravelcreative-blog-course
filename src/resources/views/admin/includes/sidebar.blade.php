@@ -21,5 +21,12 @@
                 <p>Posts</p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{route('admin.user.index')}}" class="nav-link">
+                <i class="navbar-toggler-icon fas fa-users"></i>
+                <p>Users</p>
+            </a>
+        </li>
     </ul>
 </nav>

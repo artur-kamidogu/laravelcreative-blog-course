@@ -72,6 +72,18 @@ Route::group([ 'prefix' => 'admin'], function (){
         });
     });
 
+    Route::group([ 'prefix' => 'users'], function (){
+        Route::controller(\App\Http\Controllers\Admin\AdminUserController::class)->group(function () {
+            Route::get('', 'index') ->name('admin.user.index');
+            Route::get('/create', 'create') ->name('admin.user.create');
+            Route::post('', 'store') ->name('admin.user.store');
+            Route::get('/{user}', 'show') ->name('admin.user.show');
+            Route::get('/{user}/edit', 'edit') ->name('admin.user.edit');
+            Route::patch('/{user}', 'update') ->name('admin.user.update');
+            Route::delete('/{user}', 'delete') ->name('admin.user.delete');
+        });
+    });
+
 });
 
 Auth::routes();
