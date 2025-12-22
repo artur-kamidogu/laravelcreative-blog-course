@@ -24,7 +24,8 @@ class AdminUserController extends Controller
     }
     public function create(): View
     {
-        return view('admin.user.create');
+        $roles = User::getRoles();
+        return view('admin.user.create', compact('roles'));
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -38,7 +39,8 @@ class AdminUserController extends Controller
 
     public function edit(User $user): View
     {
-        return view('admin.user.edit',compact('user'));
+        $roles = User::getRoles();
+        return view('admin.user.edit',compact('user','roles'));
     }
 
     public function update(User $user,UpdateRequest $request): RedirectResponse
