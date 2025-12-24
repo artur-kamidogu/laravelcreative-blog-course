@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminTagController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::controller(BlogController::class)->group(function () {
         Route::get('/blog', 'show');
@@ -30,14 +36,14 @@ Route::controller(BlogController::class)->group(function () {
 //});
 
 //
-Route::group([ 'prefix' => 'admin'], function (){
+Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], function (){
 
     Route::controller(AdminBlogController::class)->group(function () {
             Route::get('/blog', 'show');
     });
 
     Route::group([ 'prefix' => 'categories'], function (){
-        Route::controller(\App\Http\Controllers\Admin\AdminCategoryController::class)->group(function () {
+        Route::controller(AdminCategoryController::class)->group(function () {
             Route::get('', 'index') ->name('admin.category.index');
             Route::get('/create', 'create') ->name('admin.category.create');
             Route::post('', 'store') ->name('admin.category.store');
@@ -49,7 +55,7 @@ Route::group([ 'prefix' => 'admin'], function (){
     });
 
     Route::group([ 'prefix' => 'tags'], function (){
-        Route::controller(\App\Http\Controllers\Admin\AdminTagController::class)->group(function () {
+        Route::controller(AdminTagController::class)->group(function () {
             Route::get('', 'index') ->name('admin.tag.index');
             Route::get('/create', 'create') ->name('admin.tag.create');
             Route::post('', 'store') ->name('admin.tag.store');
@@ -61,7 +67,7 @@ Route::group([ 'prefix' => 'admin'], function (){
     });
 
     Route::group([ 'prefix' => 'posts'], function (){
-        Route::controller(\App\Http\Controllers\Admin\AdminPostController::class)->group(function () {
+        Route::controller(AdminPostController::class)->group(function () {
             Route::get('', 'index') ->name('admin.post.index');
             Route::get('/create', 'create') ->name('admin.post.create');
             Route::post('', 'store') ->name('admin.post.store');
@@ -73,7 +79,7 @@ Route::group([ 'prefix' => 'admin'], function (){
     });
 
     Route::group([ 'prefix' => 'users'], function (){
-        Route::controller(\App\Http\Controllers\Admin\AdminUserController::class)->group(function () {
+        Route::controller(AdminUserController::class)->group(function () {
             Route::get('', 'index') ->name('admin.user.index');
             Route::get('/create', 'create') ->name('admin.user.create');
             Route::post('', 'store') ->name('admin.user.store');
