@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Mail\User\PasswordMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
@@ -36,7 +37,8 @@ class AdminUserController extends Controller
         $data = $request->validated();
         $password = Str::random(10);
         $data['password'] = Hash::make($password);
-        User::firstOrCreate(['email' => $data['email']],$data); // тк почта должна быть уникальной то проверка идет по ней
+        $user = User::firstOrCreate(['email' => $data['email']],$data); // тк почта должна быть уникальной то проверка идет по ней
+        event(new Registered($user));
         Mail::to($data['email'])->send(new PasswordMail($password));
         return redirect()->route('admin.user.index');
     }

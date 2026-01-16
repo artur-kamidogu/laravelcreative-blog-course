@@ -36,7 +36,7 @@ Route::controller(BlogController::class)->group(function () {
 //});
 
 //
-Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], function (){
+Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified']], function (){
 
     Route::controller(AdminBlogController::class)->group(function () {
             Route::get('/blog', 'show');
@@ -92,5 +92,5 @@ Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], functio
 
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
