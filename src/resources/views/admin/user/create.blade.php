@@ -25,14 +25,14 @@
                     <div class="text-danger">${{$message}}</div>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="text" class="form-control" name="password" placeholder="User password">
-                    @error('password')
-                    <div class="text-danger">${{$message}}</div>
-                    @enderror
-                </div>
+{{--Это поле вырезанно так как формируеться через почту --}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="">Password</label>--}}
+{{--                    <input type="text" class="form-control" name="password" placeholder="User password">--}}
+{{--                    @error('password')--}}
+{{--                    <div class="text-danger">${{$message}}</div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
 
                 <div class="form-group">
                     <label>Select role</label>
