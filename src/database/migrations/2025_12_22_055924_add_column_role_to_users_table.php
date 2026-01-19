@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedSmallInteger('role')->nullable()->after('id'); // на sql lite походу не работает афтер
+            $table->unsignedSmallInteger('role')->nullable()->default(1)->after('id'); // на sql lite походу не работает афтер
             // задел на будущее типо айдишники внешние, но пока что это не айдишники, пока что данные в модели User
         });
     }
