@@ -26,6 +26,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 Route::controller(BlogController::class)->group(function () {
         Route::get('/blog', 'show');
     });
@@ -89,7 +93,6 @@ Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified
             Route::delete('/{user}', 'delete') ->name('admin.user.delete');
         });
     });
-
 });
 
 Auth::routes(['verify' => true]);
