@@ -9,5 +9,5 @@ test
     @csrf
     <button type="submit" class="btn btn-outline-primary">Logout</button>
 </form>
-
+{{dd(url())}}
 

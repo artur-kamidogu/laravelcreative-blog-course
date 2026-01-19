@@ -40,7 +40,10 @@ Route::controller(BlogController::class)->group(function () {
 //});
 
 //
-Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified']], function (){
+//TODO добавить проверку верификации почты, пока проблема с 403 Invalid signature
+//Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified']], function (){
+
+Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], function (){
 
     Route::controller(AdminBlogController::class)->group(function () {
             Route::get('/blog', 'show');
@@ -95,5 +98,6 @@ Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified
     });
 });
 
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
+Auth::routes();
 
