@@ -24,18 +24,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/test', function () {
     return view('test');
 });
 
 Route::controller(BlogController::class)->group(function () {
-        Route::get('/blog', 'show');
+        Route::get('/', 'index')->name('blog.index');
     });
+
+Route::group([ 'prefix' => 'posts'], function () {
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/{post}', 'show')->name('blog.show');
+    });
+    Route::post('/{post}/comments', [CommentsController::class,'storeForPost']) ->name('personal.comment.store');
+
+});
+
+
 
 
 //Route::controller(AdminBlogController::class)->group(function () {

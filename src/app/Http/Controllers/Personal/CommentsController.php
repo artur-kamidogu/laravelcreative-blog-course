@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Personal;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Requests\Comment\UpdateRequest;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use App\Models\User;
 
@@ -34,5 +36,13 @@ class CommentsController extends Controller
     {
         $comment->delete();
         return redirect()->route('personal.comments');
+    }
+    public function storeForPost(StoreRequest $request, Post $post)
+    {
+        $data = $request->validated();
+        $data['user_id']= auth()->user()->id;
+        $data['post_id']= $post->id;
+        Comment::create($data);
+        return redirect()->route('blog.show',$post->id);
     }
 }
