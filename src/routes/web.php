@@ -63,12 +63,12 @@ Route::group([ 'prefix' => 'personal','middleware' => ['auth' , 'verified']], fu
     Route::group(['prefix' => 'comments'] , function () {
         Route::controller(CommentsController::class)->group(function () {
             Route::get('', 'index') ->name('personal.comments');
-//            Route::get('/create', 'create') ->name('account.create');
-//            Route::post('', 'store') ->name('account.store');
-//            Route::get('/{category}', 'show') ->name('account.show');
-//            Route::get('/{category}/edit', 'edit') ->name('account.edit');
-//            Route::patch('/{category}', 'update') ->name('account.update');
-//            Route::delete('/{category}', 'delete') ->name('account.delete');
+//            Route::get('/create', 'create') ->name('personal.comment.create');
+//            Route::post('', 'store') ->name('personal.comment.store');
+//            Route::get('/{comment}', 'show') ->name('personal.comment.show');
+            Route::get('/{comment}/edit', 'edit') ->name('personal.comment.edit');
+            Route::patch('/{comment}', 'update') ->name('personal.comment.update');
+            Route::delete('/{comment}', 'delete') ->name('personal.comment.delete');
         });
     });
 
