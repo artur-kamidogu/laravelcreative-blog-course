@@ -44,7 +44,8 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+{{--                        TODO добавить роут--}}
+                        <a class="nav-link" href="#">Account</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mt-2 mt-lg-0">

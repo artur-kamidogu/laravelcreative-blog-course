@@ -4,10 +4,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            @include('admin.includes.tmp-cards')
             @include('admin.includes.category-header')
-
-
 
             <h2>Edit category №{{$category->id}}</h2>
             <form action="{{route('admin.category.update', $category->id)}}" method="POST" class="col-12">

@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin-lte')
 
 @section('content')
-    @include('admin.includes.tmp-cards')
+
     <section class="content">
         <div class="container-fluid">
             @include('admin.includes.user-header')

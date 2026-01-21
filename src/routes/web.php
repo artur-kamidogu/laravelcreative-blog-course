@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Personal\CommentsController;
+use App\Http\Controllers\Personal\LikedController;
+use App\Http\Controllers\Personal\PersonalController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
@@ -39,14 +42,42 @@ Route::controller(BlogController::class)->group(function () {
 //    Route::get('/admin/blog', 'show');
 //});
 
-//
-//TODO добавить проверку верификации почты, пока проблема с 403 Invalid signature
-//Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified']], function (){
+Route::group([ 'prefix' => 'personal','middleware' => ['auth' , 'verified']], function () {
 
-Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], function (){
+    Route::controller(PersonalController::class)->group(function () {
+        Route::get('/', 'index')->name('personal.index');
+    });
+
+    Route::group(['prefix' => 'liked'] , function () {
+        Route::controller(LikedController::class)->group(function () {
+            Route::get('', 'index') ->name('personal.liked');
+//            Route::get('/create', 'create') ->name('account.create');
+//            Route::post('', 'store') ->name('account.store');
+//            Route::get('/{category}', 'show') ->name('account.show');
+//            Route::get('/{category}/edit', 'edit') ->name('account.edit');
+//            Route::patch('/{category}', 'update') ->name('account.update');
+            Route::delete('/{post}', 'delete') ->name('personal.liked.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'comments'] , function () {
+        Route::controller(CommentsController::class)->group(function () {
+            Route::get('', 'index') ->name('personal.comments');
+//            Route::get('/create', 'create') ->name('account.create');
+//            Route::post('', 'store') ->name('account.store');
+//            Route::get('/{category}', 'show') ->name('account.show');
+//            Route::get('/{category}/edit', 'edit') ->name('account.edit');
+//            Route::patch('/{category}', 'update') ->name('account.update');
+//            Route::delete('/{category}', 'delete') ->name('account.delete');
+        });
+    });
+
+});
+
+Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin', 'verified']], function (){
 
     Route::controller(AdminBlogController::class)->group(function () {
-            Route::get('/blog', 'show');
+            Route::get('/blog', 'show')->name('admin.blog');
     });
 
     Route::group([ 'prefix' => 'categories'], function (){
@@ -98,6 +129,6 @@ Route::group([ 'prefix' => 'admin' , 'middleware' => ['auth' ,'admin']], functio
     });
 });
 
-//Auth::routes(['verify' => true]);
-Auth::routes();
+Auth::routes(['verify' => true]);
+//Auth::routes();
 

@@ -4,7 +4,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            @include('admin.includes.tmp-cards')
+
             @include('admin.includes.user-header')
 
 
